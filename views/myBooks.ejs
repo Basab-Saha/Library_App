@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px 10px;
+            flex: 0 0 calc(30% - 20px);
+            max-width: calc(30% - 20px);
+            text-align: left;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .return-button {
+            display: block;
+            margin-top: 20px;
+        }
+
+        .return-button button {
+            background-color: #ff4040;
+        }
+
+        .return-button button:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Borrowed Books</h1>
+        <% if (allBorrowedBooks && allBorrowedBooks.length > 0) { %>
+            <ul>
+                <% allBorrowedBooks.forEach(book => { %>
+                    <li>
+                        <strong>Title:</strong> <%= book.title %><br>
+                        <strong>Author:</strong> <%= book.author %><br>
+                        <strong>ISBN:</strong> <%= book.ISBN %><br>
+                        <form action="/return/<%= book._id %>" method="post">
+                            <button type="submit">Return</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No books borrowed.</p>
+        <% } %>
+        
+        <!-- Return Button -->
+        <div class="return-button">
+            <a href="/home"><button>Return to Home</button></a>
+        </div>
+    </div>
+</body>
+</html>

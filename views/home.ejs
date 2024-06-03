@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333333;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #666666;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .logout-form {
+            text-align: center;
+            margin-top: 40px;
+        }
+        /* Add this to your existing styles */
+.books-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.book-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+    width: 300px; /* Adjust the width as needed */
+    margin-bottom: 20px;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Basab's BookCorner❤️😍</h1>
+        <% if (typeof Name !== 'undefined') { %>
+            <p>Hello, <%= Name %>!</p>
+        <% } else { %>
+            <p>Welcome! Please log in or sign up to access the library.</p>
+        <% } %>
+
+        <% if (typeof isAdmin !== 'undefined' && isAdmin === true) { %>
+    <p>You are Admin</p>
+    <a href="/addBook"><button>Add Book</button></a>
+<% } %>
+
+
+        <br><br>
+
+        <!-- Display books -->
+       <!-- Display books -->
+       <% if (allBooks && allBooks.length > 0) { %>
+        <h2>All Books</h2>
+        <div class="books-container">
+            <% allBooks.forEach(book => { %>
+                <div class="book-card">
+                    <h3><%= book.title %></h3>
+                    <p><strong>Author:</strong> <%= book.author %></p>
+                    <p><strong>ISBN:</strong> <%= book.ISBN %></p>
+                    <p><strong>Quantity:</strong> <%= book.quantity %></p>
+                    <a href="/borrow/<%= book._id %>"><button>Borrow</button></a>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>No books found.</p>
+    <% } %>
+
+
+        <!-- My Books Button -->
+        <a href="/myBooks"><button>My Books</button></a>
+
+        <!-- Logout button -->
+        <div class="logout-form">
+            <form action="/logout" method="get">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
