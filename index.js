@@ -5,6 +5,8 @@ const app=express();
 const ConnectToMongoDb=require("./connect.js");
 const User = require("./Models/user.js");
 const cookieParser = require("cookie-parser");
+const dotenv=require("dotenv")
+dotenv.config();
 
 const { restrictToLoggedInUser } = require("./Middleware/Auth.js");
 const {restrictToAdmin}=require("./Middleware/Auth2.js")
@@ -17,7 +19,8 @@ app.set("views",path.resolve('./views'))
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
-ConnectToMongoDb("mongodb://localhost:27017/library");
+const PORT=process.env.PORT || 5000;
+ConnectToMongoDb(process.env.MONGO_URI);
 
 app.get("/signup",(req,res)=>{
     res.render("signup");
